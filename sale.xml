@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <record model="ir.ui.view" id="annul_sale_start_view_form">
+            <field name="model">sale.annul_sale.start</field>
+            <field name="type">form</field>
+            <field name="name">annul_sale_start_form</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_annul_sale">
+            <field name="name">Annul Sale</field>
+            <field name="wiz_name">sale.annul_sale</field>
+            <field name="model">sale.sale</field>
+        </record>
+        <record model="ir.action.keyword" id="act_wizard_annul_sale_keyword">
+            <field name="keyword">form_action</field>
+            <field name="model">sale.sale,-1</field>
+            <field name="action" ref="wizard_annul_sale"/>
+        </record>
+
+        <record model="ir.action.act_window.domain" id="act_sale_form_domain_annulled">
+            <field name="name">Annulled</field>
+            <field name="sequence" eval="50"/>
+            <field name="domain">[('state', '=', 'annulled')]</field>
+            <field name="act_window" ref="sale_pos.act_sale_form"/>
+        </record>
+
+    </data>
+</tryton>

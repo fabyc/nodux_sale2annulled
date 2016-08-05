@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.action.act_window.domain" id="act_invoice_form_domain_annulled">
+            <field name="name">Annulled</field>
+            <field name="sequence" eval="40"/>
+            <field name="domain">[('state', '=', 'annulled')]</field>
+            <field name="act_window" ref="account_invoice.act_invoice_out_invoice_form"/>
+        </record>
+
+    </data>
+</tryton>

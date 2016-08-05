@@ -1,0 +1,56 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:sale.annul_sale.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "model:ir.action,name:wizard_annul_sale"
+msgid "Draft Sale"
+msgstr "Anular Venta"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_invoice_form_domain_annulled"
+msgid "Annulled"
+msgstr "Anulada"
+
+msgctxt "model:ir.action.act_window.domain,name:act_sale_form_domain_annulled"
+msgid "Annulled"
+msgstr "Anulada"
+
+msgctxt "model:sale.annul_sale.start,name:"
+msgid "Annul Sale"
+msgstr "Anular Venta"
+
+msgctxt "selection:account.invoice,state:"
+msgid "Annulled"
+msgstr "Anulada"
+
+msgctxt "selection:sale.sale,invoice_state:"
+msgid "Annulled"
+msgstr "Anulada"
+
+msgctxt "selection:sale.sale,shipment_state:"
+msgid "Annulled"
+msgstr "Anulada"
+
+msgctxt "selection:sale.sale,state:"
+msgid "Annulled"
+msgstr "Anulada"
+
+msgctxt "view:sale.annul_sale.start:"
+msgid "Annul Sale"
+msgstr "Anular venta"
+
+msgctxt "view:sale.annul_sale.start:"
+msgid "Are you sure to annul those/this sale(s)?"
+msgstr "¿Está seguro que desea anular esta(s) venta(s)?"
+
+msgctxt "wizard_button:sale.annul_sale,start,annul_:"
+msgid "Annul"
+msgstr "Anular"
+
+msgctxt "wizard_button:sale.annul_sale,start,end:"
+msgid "Exit"
+msgstr "Salir"
