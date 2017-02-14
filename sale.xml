@@ -28,5 +28,22 @@ this repository contains the full copyright notices and license terms. -->
             <field name="act_window" ref="sale_pos.act_sale_form"/>
         </record>
 
+        <!-- Group -->
+        <record model="res.group" id="group_sale_anull">
+            <field name="name">Nodux - Anular Venta</field>
+        </record>
+
+        <record model="res.user-res.group"
+            id="user_admin_group_sale_anull">
+            <field name="user" ref="res.user_admin"/>
+            <field name="group" ref="group_sale_anull"/>
+        </record>
+
+        <record model="res.user-res.group"
+            id="user_trigger_group_sale_anull">
+            <field name="user" ref="res.user_admin"/>
+            <field name="group" ref="group_sale_anull"/>
+        </record>
+
     </data>
 </tryton>

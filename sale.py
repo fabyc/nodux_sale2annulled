@@ -70,20 +70,43 @@ class AnnulSale(Wizard):
         Sale = pool.get('sale.sale')
         Invoice = pool.get('account.invoice')
         sales = Sale.browse(Transaction().context['active_ids'])
-        for s in sales:
-            sale = s
-            invoices= Invoice.search([('description', '=', sale.reference)])
-            sale.state = 'annulled'
-            cursor = Transaction().cursor
-            for i in invoices:
-                cursor.execute('DELETE FROM account_move_line WHERE move = %s' %i.move.id)
-                cursor.execute('DELETE FROM account_move WHERE id = %s' %i.move.id)
-                for payment in sale.payments:
-                    cursor.execute('DELETE FROM account_statement_line WHERE id = %s' %payment.id)
-                for move in sale.moves:
-                    cursor.execute('DELETE FROM stock_move WHERE id = %s' % move.id)
-                i.state = 'annulled'
-                i.save()
-                sale.invoice_state = 'annulled'
-                sale.shipment_state = 'none'
-                sale.save()
+        ModelData = pool.get('ir.model.data')
+        User = pool.get('res.user')
+        Group = pool.get('res.group')
+
+        def in_group():
+            origin = str(sales)
+            group = Group(ModelData.get_id('nodux_sale2annulled',
+                    'group_sale_anull'))
+            transaction = Transaction()
+
+            user_id = transaction.user
+            if user_id == 0:
+                user_id = transaction.context.get('user', user_id)
+            if user_id == 0:
+                return True
+            user = User(user_id)
+            return origin and group in user.groups
+
+        for sale in sales:
+            if sale.state == "draft":
+                pass
+            else:
+                if not in_group():
+                    self.raise_user_error('No tiene permiso para anular la venta %s', sale.id)
+                else:
+                    invoices= Invoice.search([('description', '=', sale.reference)])
+                    sale.state = 'annulled'
+                    cursor = Transaction().cursor
+                    for i in invoices:
+                        cursor.execute('DELETE FROM account_move_line WHERE move = %s' %i.move.id)
+                        cursor.execute('DELETE FROM account_move WHERE id = %s' %i.move.id)
+                        for payment in sale.payments:
+                            cursor.execute('DELETE FROM account_statement_line WHERE id = %s' %payment.id)
+                        for move in sale.moves:
+                            cursor.execute('DELETE FROM stock_move WHERE id = %s' % move.id)
+                        i.state = 'annulled'
+                        i.save()
+                        sale.invoice_state = 'annulled'
+                        sale.shipment_state = 'none'
+                        sale.save()
